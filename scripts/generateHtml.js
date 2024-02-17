@@ -25,7 +25,7 @@ const buildHtml = (games) => {
       <li style="margin-bottom: 16px;">
         <span style="display: inline-block; width: 600px;">${name}</span>
         <span style="display: inline-block; width: 120px;">${Math.round(playtime_forever / 60)}h</span>
-        <span style="display: inline-block; width: 120px;">${Math.round((playtime_2weeks ?? 0) / 60)}h</span>                        
+        <span style="display: inline-block; width: 120px;">${Math.round((playtime_2weeks ?? 0) / 60)}h</span>
         <span style="display: inline-block; width: 120px;">
           <a href="https://www.youtube.com/results?search_query=${encodeURI(name)}}" target="_blank" rel="noopener noreferrer">
             YouTube
@@ -33,9 +33,14 @@ const buildHtml = (games) => {
         </span>        
         <span style="display: inline-block; width: 120px;">
           <a href="https://www.youtube.com/results?search_query=${encodeURI(name + ' 実況')}}" target="_blank" rel="noopener noreferrer">
-            YouTube 実況
+            実況
           </a>
         </span>
+        <span style="display: inline-block; width: 120px;">
+          <a href="https://www.youtube.com/results?search_query=${encodeURI(name + ' VTuber')}}" target="_blank" rel="noopener noreferrer">
+            VTuber
+          </a>
+        </span>        
       </li>  
     `)
     .join('');
