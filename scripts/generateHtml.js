@@ -30,7 +30,7 @@ const buildHtml = (games) => {
           <a href="https://www.youtube.com/results?search_query=${encodeURI(name)}" target="_blank" rel="noopener noreferrer">
             YouTube
           </a>
-        </span>        
+        </span>
         <span style="display: inline-block; width: 120px;">
           <a href="https://www.youtube.com/results?search_query=${encodeURI(name + ' 実況')}" target="_blank" rel="noopener noreferrer">
             実況
@@ -40,7 +40,12 @@ const buildHtml = (games) => {
           <a href="https://www.youtube.com/results?search_query=${encodeURI(name + ' VTuber')}" target="_blank" rel="noopener noreferrer">
             VTuber
           </a>
-        </span>        
+        </span>
+        <span style="display: inline-block; width: 120px;">
+          <a href="https://www.youtube.com/results?search_query=${encodeURI(name)}&sp=EgIQAw%253D%253D" target="_blank" rel="noopener noreferrer">
+            再生リスト
+          </a>
+        </span>
       </li>  
     `)
     .join('');
@@ -84,6 +89,5 @@ const buildHtml = (games) => {
 };
 
 fetchGames()
-  .then(a => { console.log(a); return a; })
   .then(buildHtml)
   .then(html => fs.writeFileSync('./index.html', html));
