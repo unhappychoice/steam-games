@@ -24,8 +24,8 @@ const buildHtml = (games) => {
     .map(({ name, playtime_forever, playtime_2weeks }) => `
       <li style="margin-bottom: 16px;">
         <span style="display: inline-block; width: 600px;">${name}</span>
-        <span style="display: inline-block; width: 120px;">${Math.round(playtime_forever / 60)}h</span>
-        <span style="display: inline-block; width: 120px;">${Math.round((playtime_2weeks ?? 0) / 60)}h</span>
+        <span style="display: inline-block; width: 120px;">${Math.round(playtime_forever / 60 * 10) / 10}h</span>
+        <span style="display: inline-block; width: 120px;">${Math.round((playtime_2weeks ?? 0) / 60 * 10) / 10}h</span>
         <span style="display: inline-block; width: 120px;">
           <a href="https://www.youtube.com/results?search_query=${encodeURI(name)}" target="_blank" rel="noopener noreferrer">
             YouTube
