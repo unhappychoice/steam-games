@@ -1,0 +1,29 @@
+name: Update data
+on:
+  schedule:
+    - cron:  '0 0 * * *'
+jobs:
+  update-data:
+    runs-on: ubuntu-latest
+    env:
+      STEAM_API_KEY: ${{ secrets.STEAM_API_KEY }}
+    steps:
+      - uses: actions/checkout@master
+      - uses: actions/setup-node@v3
+        with:
+          node-version: '20.x'
+      - name: Run update script
+        run: node scripts/generateHtml.js
+      - name: Count changes
+        id: changes
+        run: |
+          git add -N .
+          echo "::set-output name=count::$(git diff --name-only | wc -l)"
+      - name: commit & push
+        run: |
+          git config user.name "Yuji Ueki"
+          git config user.email unhappychoice@gmail.com
+          git add .
+          git commit -m "Update automatically"
+          git push
+        if: steps.changes.outputs.count > 0
