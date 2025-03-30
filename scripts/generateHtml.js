@@ -128,7 +128,7 @@ const buildHtml = (games) => {
     </style>
   </head>
   <body>
-    <ul style="padding: 32px 0;">
+    <ul style="margin: 0 auto; padding: 32px 0; max-width: 1200px;">
       ${gamesHtml}
     </ul>
   </body>
