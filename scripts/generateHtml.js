@@ -144,6 +144,7 @@ const buildRouletteHtml = (games) => {
     .filter(({ achievements }) => achievements && achievements.filter(({ achieved }) => achieved !== 1).length > 0)
     .map(({ game: { name, appid }, nextAchievements }) => ({
       name,
+      appid,
       imageUrl: `https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${appid}/library_600x900.jpg`,
       nextAchievements
     }));
@@ -204,7 +205,9 @@ const buildRouletteHtml = (games) => {
   </head>
   <body>
     <div style="display: flex; padding: 64px 48px; flex-direction: column; align-items: center;">
-      <img id="game-image" style="display: block; width: 300px; height:450px; background: #232323;" src="${`https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.game.appid}/library_600x900.jpg`}"/>
+      <a id="game-link" href="steam://rungameid/${game.game.appid}">
+        <img id="game-image" style="display: block; width: 300px; height:450px; background: #232323;" src="${`https://shared.akamai.steamstatic.com/store_item_assets/steam/apps/${game.game.appid}/library_600x900.jpg`}"/>
+      </a>      
       <p id="game-title" style="margin: 24px 0 0; font-size: 22px">${game.game.name}</p>
       <ul style="margin: 32px 0 0; padding: 0; width: 450px;">
         ${game.nextAchievements.map(achievementHtml).join('\n')}
@@ -215,6 +218,7 @@ const buildRouletteHtml = (games) => {
   <script>
     const games = ${JSON.stringify(gamesJson)};
 
+    const $gameLink = document.getElementById('game-link');
     const $gameTitle = document.getElementById('game-title');
     const $gameImage = document.getElementById('game-image');
     const $startButton = document.getElementById('start-button');
@@ -241,6 +245,7 @@ const buildRouletteHtml = (games) => {
       shuffle(() => {
         requestAnimationFrame(() => {
           const index = Math.floor(Math.random() * games.length);
+          $gameLink.href = 'steam://rungameid/' + games[index].appid;          
           $gameTitle.textContent = games[index].name;
           $gameImage.src = games[index].imageUrl;
           
